@@ -485,6 +485,9 @@ def train(
     device,
 ):  
     view = orientation.lower()
+    # Random pose perturbation is independent from
+    if view == 'pa':
+        view = 'ap'
     metric = MultiscaleNormalizedCrossCorrelation2d(eps=1e-4)
     geodesic = GeodesicSE3()
     double = DoubleGeodesic(drr.detector.sdd/2)
@@ -650,6 +653,6 @@ def main(
 if __name__ == "__main__":
     Path("checkpoints").mkdir(exist_ok=True)
     data_dir = "/home/francois/Projects/data/raw_data"
-    orientation = "AP"
+    orientation = "PA"
     
     main(data_dir, orientation)
